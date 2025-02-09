@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 
 const DoctorDashboard = () => {
   const doctorName = localStorage.getItem("doctorName") || "Doctor";
   const doctorId = localStorage.getItem("doctorId");
+  const navigate = useNavigate();
 
   const [stats, setStats] = useState({
     confirmed: 0,
@@ -29,6 +30,12 @@ const DoctorDashboard = () => {
     if (doctorId) fetchStats();
   }, [doctorId]);
 
+  // Logout function
+  const handleLogout = () => {
+    localStorage.clear(); // Clear localStorage
+    navigate("/"); // Redirect to login page
+  };
+
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
@@ -36,7 +43,17 @@ const DoctorDashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-6 bg-gray-100 overflow-auto">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">Queuely</h1>
+        {/* Header Section with Logout Button */}
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold text-gray-800">Queuely</h1>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </div>
+
         <div className="p-6">
           <h1 className="text-2xl font-bold text-teal-700">
             Welcome, {doctorName} 👋
@@ -59,11 +76,10 @@ const DoctorDashboard = () => {
 
 // Stat Card Component
 const StatCard = ({ title, count, color }) => (
-  <div className={`bg-white shadow-lg rounded-lg p-6  border-l-4 border-${color}-500`}>
+  <div className={`bg-white shadow-lg rounded-lg p-6 border-l-4 border-${color}-500`}>
     <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
     <p className={`text-${color}-600 text-3xl font-bold`}>{count}</p>
   </div>
 );
 
 export default DoctorDashboard;
-
