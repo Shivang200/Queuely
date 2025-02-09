@@ -168,6 +168,24 @@ router.get('/completed/:doctorId',async(req,res)=>{
 
   // to delete a completed appointment manually (we also deleting it automatically using cron )auto delete in 7 days of completion
   
+  router.get("/stats/:doctorId", async (req, res) => {
+    try {
+      const { doctorId } = req.params; // Get doctor ID from request params
+  
+      // 🔢 Count the number of appointments for each status
+      const confirmed = await Appointment.countDocuments({ doctor: doctorId, status: "confirmed" });
+      const pending = await Appointment.countDocuments({ doctor: doctorId, status: "pending" });
+      const canceled = await Appointment.countDocuments({ doctor: doctorId, status: "canceled" });
+      const completed = await Appointment.countDocuments({ doctor: doctorId, status: "completed" });
+  
+      // 📊 Send the stats as a JSON response
+      res.json({ confirmed, pending, canceled, completed });
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+      res.status(500).json({ message: "Server error" }); // Handle server errors
+    }
+  });
+
 router.delete("/delete/:id",  async (req, res) => {
     try {
       const { id } = req.params;
