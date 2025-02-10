@@ -43,7 +43,10 @@ const UpcomingAppointments = () => {
       );
 
       console.log("Status updated:", response.data);
-
+      // .map() loops through all appointments.
+      //  Checks if appointment._id matches appointmentId.
+      //  If it matches, creates a new object with updated status.
+      //  If it doesn't match, returns the same object unchanged.
       setAppointments((prevAppointments) =>
         prevAppointments.map((appointment) =>
           appointment._id === appointmentId

@@ -35,6 +35,9 @@ const CanceledAppointments = () => {
 
     try {
       await axios.delete(`http://localhost:5000/appointment/delete/${id}`);
+//       The appointment is deleted in the database,
+// But it will still appear on the screen until the page is refreshed.
+// That’s why we manually update the UI using .filter(), so the deleted item disappears instantly from the screen.
       setAppointments((prev) => prev.filter((appointment) => appointment._id !== id));
       console.log("Appointment deleted successfully");
     } catch (error) {
