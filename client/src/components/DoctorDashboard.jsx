@@ -8,6 +8,7 @@ const DoctorDashboard = () => {
   const doctorId = localStorage.getItem("doctorId");
   const navigate = useNavigate();
 
+  //for stat card
   const [stats, setStats] = useState({
     confirmed: 0,
     pending: 0,
@@ -16,19 +17,23 @@ const DoctorDashboard = () => {
   });
 
   useEffect(() => {
+    // Function to fetch appointment statistics for the doctor
     const fetchStats = async () => {
       try {
+        // Sending GET request to fetch appointment statistics for the doctor
         const response = await axios.get(
           `http://localhost:5000/appointment/stats/${doctorId}`
         );
-        setStats(response.data);
+        setStats(response.data); // Updating the stats state with fetched data
       } catch (error) {
+        // Logging any error that occurs during the fetch process
         console.error("Error fetching appointment stats:", error.response?.data || error.message);
       }
     };
-
+  
+    // Ensuring the API request is only made when doctorId is available (not null or undefined)
     if (doctorId) fetchStats();
-  }, [doctorId]);
+  }, [doctorId]); // Runs the effect whenever doctorId changes
 
   // Logout function
   const handleLogout = () => {

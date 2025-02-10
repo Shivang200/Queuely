@@ -313,12 +313,12 @@ router.post("/signin", async (req, res) => {
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET
     );
-
+    // Use jwt.sign() to generate a secure token with user data.
+    // Use res.json() to send the token to the frontend.
     res.json({
       msg: "Login successful",
       token,
-      token,
-      role: role, // 🛑 Make sure this is included!
+      role: role, //  Make sure this is included!
       userId: user._id,
       name: user.name,
     });

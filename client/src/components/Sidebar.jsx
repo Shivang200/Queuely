@@ -11,6 +11,7 @@ const Sidebar = () => {
       {/* Hamburger Button (Only in Mobile) */}
       <button 
         className="absolute top-4 left-4 bg-gray-800 p-2 rounded-md sm:hidden"
+        //toggle func
         onClick={() => setIsOpen(!isOpen)}
       >
         ☰
@@ -48,7 +49,8 @@ export default Sidebar;
 
 
 // When a doctor clicks "Pending Appointments" in Sidebar,
-// /doctor-dashboard/pending → Renders <PendingAppointments /> inside <Outlet />.
+// /doctor-dashboard/pending → Renders <PendingAppointments /> inside <Outlet />. so basicaly outlet does this it lets you render a component wheree you used <outlet/> but in our case i defined a diff url for that page so it opened on diff page
+
 
 // When a doctor clicks "Upcoming Appointments",
 // /doctor-dashboard/upcoming → Shows <UpcomingAppointments /> inside <Outlet />.

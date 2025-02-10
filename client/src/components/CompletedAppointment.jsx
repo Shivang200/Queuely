@@ -15,6 +15,7 @@ const CompletedAppointments = () => {
 
         console.log("API Response:", response.data);
 
+        // Checks if appointments is an array before updating the state.
         if (Array.isArray(response.data.appointments)) {
           setAppointments(response.data.appointments);
         } else {
@@ -31,10 +32,17 @@ const CompletedAppointments = () => {
   }, [doctorId]);
 
   const handleDeleteAppointment = async (id) => {
+    // Show a confirmation popup before deleting
     if (!window.confirm("Are you sure you want to delete this appointment?")) return;
 
     try {
+         // Send a DELETE request to the server to remove the appointment
       await axios.delete(`http://localhost:5000/appointment/delete/${id}`);
+
+      // prev represents the current list of appointments before any changes.
+//       .filter() loops through each appointment in the prev state (current appointments).
+// It checks if appointment._id matches the id provided to the handleDeleteAppointment function.
+// If it matches, that appointment is excluded from the new state.
       setAppointments((prev) => prev.filter((appointment) => appointment._id !== id));
       console.log("Appointment deleted successfully");
     } catch (error) {
