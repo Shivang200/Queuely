@@ -11,10 +11,10 @@ const HeroSection = () => {
   }, []);
 
   const handleNavigation = () => {
-    if (role === "doctor" || role==="admin") {
+    if (role === "doctor") {
       navigate("/doctordashboard");
-    } else if (role === "patient" || role==="admin") {
-      navigate("/userhome");
+    } else if (role === "patient") {
+      navigate("/userdashboard");
     } else {
       navigate("/signin"); // Redirect to sign-in if role is missing
     }
@@ -29,7 +29,7 @@ const HeroSection = () => {
             Queue Less, Do More
           </h2>
           <h1 className="text-xl md:text-5xl font-bold mt-2 mb-3 leading-tight">
-            Say goodbye to long waits, say hello to Queuely
+            Say goodbye to long waits, say hello to Queuly
           </h1>
           <button
             onClick={handleNavigation}
