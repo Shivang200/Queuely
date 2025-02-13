@@ -29,8 +29,8 @@ const doctorValidate = zod.object({
   email: zod.string().email(), // Ensure valid email format
   password: zod.string(), // Password length validation
   specialization: zod.string(), // Ensure specialization is provided
-  clinicDetails: zod.string().optional(), // Optional field for clinic details
-  availableTimings: zod.string().optional(), // Optional field for available timings
+  clinicAddress: zod.string(), // Optional field for clinic details
+  availableTimings: zod.string() // Optional field for available timings
 });
 
 // POST route to handle admin login
@@ -151,7 +151,7 @@ router.post("/signup/doctor", async (req, res) => {
       email,
       password,
       specialization,
-      clinicDetails,
+      clinicAddress,
       availableTimings,
     } = response.data;
 
@@ -165,7 +165,7 @@ router.post("/signup/doctor", async (req, res) => {
       email,
       password: hashedPassword,
       specialization,
-      clinicDetails,
+      clinicAddress,
       availableTimings,
       role: "doctor",
     });

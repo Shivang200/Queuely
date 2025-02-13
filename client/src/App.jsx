@@ -14,6 +14,9 @@ import CanceledAppointments from "./components/CanceledAppointment";
 // import CancelledAppointments from "./CancelledAppointments";
 
 import DoctorDashboard from "./components/DoctorDashboard";
+import UserDashboard from "./components/UserDashboard";
+import DoctorDetails from "./components/DoctorDetails";
+import UserHome from "./components/UserHome";
 
 
 const App = () => {
@@ -30,6 +33,9 @@ const App = () => {
       <Route path="/doctordashboard/upcoming-appointment" element={<UpcomingAppointments />}/>
       <Route path="/doctordashboard/completed-appointment" element={<CompletedAppointments />}/>
       <Route path="/doctordashboard/canceled-appointment" element={<CanceledAppointments />}/>
+      <Route path="/userdashboard" element={<UserDashboard/>}/>
+      <Route path="/doctor/:id" element={<DoctorDetails />} />  
+      <Route path="/userhome" element={<UserHome />} />  
       
       
       

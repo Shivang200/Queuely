@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Appointment = require("../models/appointment");
-const { authMiddleware, authRole } = require("../middlewares/authmiddleware");
+// const { authMiddleware, authRole } = require("../middlewares/authmiddleware");
 const Patient = require("../models/patientModel");
 const Doctor = require("../models/doctorModel");
 const router = express.Router();
@@ -217,6 +217,49 @@ router.get("/all/doctors", async (req, res) => {
     res.json({
       msg: "error",error:error.message
     });
+  }
+});
+
+// Get a single doctor by ID
+router.get("/doctor/:id", async (req, res) => {
+  try {
+    const doctorId = req.params.id;
+    const doctor = await Doctor.findById(doctorId);
+
+    if (!doctor) {
+      return res.status(404).json({ msg: "Doctor not found" });
+    }
+
+    res.json({ msg: "Doctor fetched successfully", doctor });
+  } catch (error) {
+    res.status(500).json({ msg: "Server error", error: error.message });
+  }
+});
+
+
+//router to get a list of confirmed appointments in user
+
+router.get("/user/confirmed/:patientId", async (req, res) => {
+  try {
+    const { patientId } = req.params;
+
+    console.log("Received patientId:", patientId);
+
+    const appointments = await Appointment.find({
+      patient: new mongoose.Types.ObjectId(patientId), // Use 'patient' (not 'patientId')
+      status: "confirmed",
+    }).populate("doctor", "name specialization clinicAddress"); // Populate doctor details
+
+    console.log("Matching appointments:", appointments);
+
+    if (appointments.length === 0) {
+      return res.json({ message: "No confirmed appointments found." });
+    }
+
+    res.json({ appointments });
+  } catch (error) {
+    console.error("Error fetching approved appointments:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 });
 

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const userRoutes = require('./routes/users');
 const appointmentRoutes = require("./routes/appointmentRoutes");
+const { authMiddleware } = require('./middlewares/authmiddleware');
 require('dotenv').config();
 const app = express()
 
@@ -11,6 +12,7 @@ app.use(cors({
   methods: "GET,POST,PUT,DELETE",
   credentials: true, // Allow cookies if needed
 }));
+// app.use(authMiddleware)
 app.use(express.json());
 // http://localhost:5000/user/signup/doctor /signup/doctor is due to router.post('signup/doctor')
 app.use('/user', userRoutes); 

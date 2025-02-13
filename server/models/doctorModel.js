@@ -6,8 +6,8 @@ const DoctorSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     specialization: { type: String, required: true },
-    clinicDetails: { type: String },
-    availableTimings: { type: String },
+    clinicAddress: { type: String, required:true },
+    availableTimings: { type: String,required:true },
 
     // no need to add roles but have to add to make the roles based auth part esy
     role: {

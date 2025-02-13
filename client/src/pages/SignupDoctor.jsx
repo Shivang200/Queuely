@@ -11,7 +11,7 @@ const SignupDoctor = () => {
     email: "",
     password: "",
     specialization: "",
-    clinicDetails: "",
+    clinicAddress: "",
     availableTimings: "",
   });
 
@@ -90,19 +90,22 @@ const SignupDoctor = () => {
               required
             />
             <textarea
-              name="clinicDetails"
-              placeholder="Clinic Details (Optional)"
-              value={formData.clinicDetails}
+            type="text"
+              name="clinicAddress"
+              placeholder="Clinic address,city"
+              value={formData.clinicAddress}
               onChange={handleChange}
               className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
+              required
             />
             <input
               type="text"
               name="availableTimings"
-              placeholder="Available Timings (Optional)"
+              placeholder="9 to 5"
               value={formData.availableTimings}
               onChange={handleChange}
               className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
+              required
             />
           </div>
           <button

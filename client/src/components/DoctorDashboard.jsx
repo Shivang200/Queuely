@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 const DoctorDashboard = () => {
@@ -50,7 +51,9 @@ const DoctorDashboard = () => {
       <div className="flex-1 p-6 bg-gray-100 overflow-auto">
         {/* Header Section with Logout Button */}
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-800">Queuely</h1>
+        <Link to="/" className="text-2xl font-bold text-gray-800">
+    Queuely
+  </Link>
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"

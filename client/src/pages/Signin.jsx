@@ -43,10 +43,12 @@ const Signin = () => {
 
         // Redirect user based on their role
         if (response.data.role === "doctor") {
+          localStorage.setItem("doctorToken", response.data.token);
           localStorage.setItem("doctorId", response.data.userId); // Store doctor ID
           localStorage.setItem("doctorName", response.data.name); // Store doctor name
           navigate("/doctordashboard"); // Redirect to doctor dashboard
         } else if (response.data.role === "patient") {
+          localStorage.setItem("patientToken", response.data.token);
           localStorage.setItem("patientId", response.data.userId); // Store patient ID
           localStorage.setItem("patientName", response.data.name); // Store patient name
           navigate("/patient-dashboard"); // Redirect to patient dashboard
