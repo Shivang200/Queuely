@@ -1,14 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Appointment = require("../models/appointment");
-// const { authMiddleware, authRole } = require("../middlewares/authmiddleware");
+ const { authMiddleware, authRole } = require("../middlewares/authmiddleware");
 const Patient = require("../models/patientModel");
 const Doctor = require("../models/doctorModel");
 const router = express.Router();
 
 // Route to book an appointment
 // authMiddleware- Patient books an appointment (only logged-in patients can book)
-router.post("/book", async (req, res) => {
+router.post("/book", authMiddleware,authRole(["patient"]), async (req, res) => {
   try {
     const { patientId, doctorId, date } = req.body;
     // Log IDs to see their format
@@ -57,7 +57,7 @@ router.post("/book", async (req, res) => {
 
 // here receptionist updates the appointment by updating time and status
 // authrole-Receptionist updates appointment (only receptionists can modify)
-router.put("/:id", async (req, res) => {
+router.put("/:id",authMiddleware,authRole(["doctor"]) ,async (req, res) => {
   try {
     const { time, status } = req.body; // Time and status are provided by the receptionist
 
@@ -91,7 +91,7 @@ router.put("/:id", async (req, res) => {
 
 //route to get all appointment of all status
 // Get all appointments for a doctor (pending statuses)
-router.get("/pending/:doctorId", async (req, res) => {
+router.get("/pending/:doctorId",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { doctorId } = req.params; // Extract doctor ID from URL
 
@@ -113,7 +113,7 @@ router.get("/pending/:doctorId", async (req, res) => {
 
 // to get all confirmed appointment of doctor
 // authrole- only receptionsist need to see all appointment of his doctor
-router.get("/confirmed/:doctorId", async (req, res) => {
+router.get("/confirmed/:doctorId",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { doctorId } = req.params; // Extract the doctor's ID from the request URL
 
@@ -137,7 +137,7 @@ router.get("/confirmed/:doctorId", async (req, res) => {
 
 //router to get canceled appointment
 
-router.get("/canceled/:doctorId", async (req, res) => {
+router.get("/canceled/:doctorId",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { doctorId } = req.params;
 
@@ -156,7 +156,7 @@ router.get("/canceled/:doctorId", async (req, res) => {
 });
 //router to get completed appointment
 
-router.get("/completed/:doctorId", async (req, res) => {
+router.get("/completed/:doctorId",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { doctorId } = req.params;
 
@@ -176,7 +176,7 @@ router.get("/completed/:doctorId", async (req, res) => {
 
 // to delete a completed appointment manually (we also deleting it automatically using cron )auto delete in 7 days of completion
 
-router.get("/stats/:doctorId", async (req, res) => {
+router.get("/stats/:doctorId",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { doctorId } = req.params; // Get doctor ID from request params
 
@@ -206,7 +206,7 @@ router.get("/stats/:doctorId", async (req, res) => {
   }
 });
 
-router.get("/all/doctors", async (req, res) => {
+router.get("/all/doctors", authMiddleware,authRole(["patient"]),async (req, res) => {
   try {
     const doctors = await Doctor.find();
     res.json({
@@ -221,7 +221,7 @@ router.get("/all/doctors", async (req, res) => {
 });
 
 // Get a single doctor by ID
-router.get("/doctor/:id", async (req, res) => {
+router.get("/doctor/:id",authMiddleware,authRole(["patient"]), async (req, res) => {
   try {
     const doctorId = req.params.id;
     const doctor = await Doctor.findById(doctorId);
@@ -239,7 +239,7 @@ router.get("/doctor/:id", async (req, res) => {
 
 //router to get a list of confirmed appointments in user
 
-router.get("/user/confirmed/:patientId", async (req, res) => {
+router.get("/user/confirmed/:patientId",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { patientId } = req.params;
 
@@ -263,7 +263,7 @@ router.get("/user/confirmed/:patientId", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id",authMiddleware,authRole(["doctor"]), async (req, res) => {
   try {
     const { id } = req.params;
 

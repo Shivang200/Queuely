@@ -11,7 +11,11 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/appointment/all/doctors");
+        const response = await axios.get("http://localhost:5000/appointment/all/doctors",{
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
         setDoctors(response.data.doctors);
       } catch (error) {
         setError("Failed to fetch doctors. Please try again.");

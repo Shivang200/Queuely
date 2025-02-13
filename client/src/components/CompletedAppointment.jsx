@@ -10,7 +10,11 @@ const CompletedAppointments = () => {
       try {
         console.log("Fetching completed appointments for doctor:", doctorId);
         const response = await axios.get(
-          `http://localhost:5000/appointment/completed/${doctorId}`
+          `http://localhost:5000/appointment/completed/${doctorId}`,{
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
 
         console.log("API Response:", response.data);
@@ -37,7 +41,11 @@ const CompletedAppointments = () => {
 
     try {
          // Send a DELETE request to the server to remove the appointment
-      await axios.delete(`http://localhost:5000/appointment/delete/${id}`);
+      await axios.delete(`http://localhost:5000/appointment/delete/${id}`,{
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
       // prev represents the current list of appointments before any changes.
 //       .filter() loops through each appointment in the prev state (current appointments).

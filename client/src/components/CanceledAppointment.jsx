@@ -10,7 +10,12 @@ const CanceledAppointments = () => {
       try {
         console.log("Fetching cancelled appointments for doctor:", doctorId);
         const response = await axios.get(
-          `http://localhost:5000/appointment/canceled/${doctorId}`
+          `http://localhost:5000/appointment/canceled/${doctorId}`,{
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            }
+
+          },
         );
 
         console.log("API Response:", response.data);
@@ -34,7 +39,11 @@ const CanceledAppointments = () => {
     if (!window.confirm("Are you sure you want to delete this appointment?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/appointment/delete/${id}`);
+      await axios.delete(`http://localhost:5000/appointment/delete/${id}`,{
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 //       The appointment is deleted in the database,
 // But it will still appear on the screen until the page is refreshed.
 // That’s why we manually update the UI using .filter(), so the deleted item disappears instantly from the screen.

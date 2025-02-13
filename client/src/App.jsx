@@ -17,6 +17,8 @@ import DoctorDashboard from "./components/DoctorDashboard";
 import UserDashboard from "./components/UserDashboard";
 import DoctorDetails from "./components/DoctorDetails";
 import UserHome from "./components/UserHome";
+import PrivateDoctorRoute from "./components/PrivateDoctorRoute";
+import PrivatePatientRoute from "./components/PrivatePatientRoute";
 
 
 const App = () => {
@@ -28,14 +30,21 @@ const App = () => {
       <Route path="/user-signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin />} />
       <Route path="/doctor-signup" element={<SignupDoctor />}/>
-      <Route path="/doctordashboard" element={<DoctorDashboard />}/>
-      <Route path="/doctordashboard/pending-appointment" element={<PendingAppointments />}/>
-      <Route path="/doctordashboard/upcoming-appointment" element={<UpcomingAppointments />}/>
-      <Route path="/doctordashboard/completed-appointment" element={<CompletedAppointments />}/>
-      <Route path="/doctordashboard/canceled-appointment" element={<CanceledAppointments />}/>
-      <Route path="/userdashboard" element={<UserDashboard/>}/>
-      <Route path="/doctor/:id" element={<DoctorDetails />} />  
-      <Route path="/userhome" element={<UserHome />} />  
+
+
+      <Route path="/doctordashboard" element={
+        <PrivateDoctorRoute> <DoctorDashboard /></PrivateDoctorRoute>
+       
+        }/>
+      <Route path="/doctordashboard/pending-appointment" element={<PrivateDoctorRoute> <PendingAppointments /></PrivateDoctorRoute>}/>
+      <Route path="/doctordashboard/upcoming-appointment" element={<PrivateDoctorRoute><UpcomingAppointments /></PrivateDoctorRoute>}/>
+      <Route path="/doctordashboard/completed-appointment" element={<PrivateDoctorRoute><CompletedAppointments /></PrivateDoctorRoute>}/>
+      <Route path="/doctordashboard/canceled-appointment" element={<PrivateDoctorRoute><CanceledAppointments /></PrivateDoctorRoute>}/>
+      
+      
+      <Route path="/userdashboard" element={<PrivatePatientRoute><UserDashboard/></PrivatePatientRoute>}/>
+      <Route path="/doctor/:id" element={<PrivatePatientRoute><DoctorDetails /></PrivatePatientRoute>} />  
+      <Route path="/userhome" element={<PrivatePatientRoute><UserHome /></PrivatePatientRoute>} />  
       
       
       

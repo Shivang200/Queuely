@@ -10,7 +10,11 @@ const PendingAppointments = () => {
       try {
         console.log("Fetching pending appointments for doctor:", doctorId);
         const response = await axios.get(
-          `http://localhost:5000/appointment/pending/${doctorId}`
+          `http://localhost:5000/appointment/pending/${doctorId}`,{
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
 
         console.log("API Response:", response.data);
@@ -47,7 +51,11 @@ const PendingAppointments = () => {
 
       const response = await axios.put(
         `http://localhost:5000/appointment/${appointmentId}`,
-        updateData
+        updateData,{
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
 
       console.log("Status updated:", response.data);

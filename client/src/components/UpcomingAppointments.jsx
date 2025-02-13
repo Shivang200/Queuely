@@ -10,7 +10,11 @@ const UpcomingAppointments = () => {
       try {
         console.log("Fetching upcoming appointments for doctor:", doctorId);
         const response = await axios.get(
-          `http://localhost:5000/appointment/confirmed/${doctorId}`
+          `http://localhost:5000/appointment/confirmed/${doctorId}`,{
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
 
         console.log("API Response:", response.data);
@@ -39,7 +43,9 @@ const UpcomingAppointments = () => {
 
       const response = await axios.put(
         `http://localhost:5000/appointment/${appointmentId}`,
-        { status: newStatus, time: timestamp } // Include timestamp in request
+        { status: newStatus, time: timestamp }, {headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },} // Include timestamp in request
       );
 
       console.log("Status updated:", response.data);
