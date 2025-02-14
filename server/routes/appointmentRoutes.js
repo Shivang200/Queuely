@@ -239,7 +239,7 @@ router.get("/doctor/:id",authMiddleware,authRole(["patient"]), async (req, res) 
 
 //router to get a list of confirmed appointments in user
 
-router.get("/user/confirmed/:patientId",authMiddleware,authRole(["doctor"]), async (req, res) => {
+router.get("/user/confirmed/:patientId",authMiddleware,authRole(["doctor","patient"]), async (req, res) => {
   try {
     const { patientId } = req.params;
 
