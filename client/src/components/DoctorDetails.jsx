@@ -92,17 +92,11 @@ const DoctorDetails = () => {
           </p>
 
           {/* Date Input - Manual entry on small screens, Calendar picker on large screens */}
-          <input
-            type="text"
-            placeholder="Enter date (YYYY-MM-DD)"
-            className="mt-4 px-4 py-2 border rounded-lg w-full sm:hidden"
-            value={appointmentDate}
-            onChange={(e) => setAppointmentDate(e.target.value)}
-          />
+          
 
           <input
             type="date"
-            className="mt-4 px-4 py-2 border rounded-lg w-full hidden sm:block"
+            className="mt-4 px-4 py-2 border rounded-lg w-full "
             value={appointmentDate}
             onChange={(e) => setAppointmentDate(e.target.value)}
           />
