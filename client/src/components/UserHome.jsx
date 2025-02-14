@@ -20,7 +20,7 @@ const UserHome = () => {
               },
           }
       );
-      
+      const appointments = response.data?.appointments || [];
         const approvedAppointments = response.data.appointments.filter(
           (appointment) => appointment.status === "confirmed"
         );
