@@ -52,7 +52,7 @@ const Signin = () => {
           localStorage.setItem("patientToken", response.data.token);
           localStorage.setItem("patientId", response.data.userId); // Store patient ID
           localStorage.setItem("patientName", response.data.name); // Store patient name
-          navigate("/patient-dashboard"); // Redirect to patient dashboard
+          navigate("/patientdashboard"); // Redirect to patient dashboard
         } else {
           navigate("/"); // Redirect to home page as fallback
         }
