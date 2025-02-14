@@ -10,9 +10,10 @@ const UserHome = () => {
 
   useEffect(() => {
     const fetchApprovedAppointments = async () => {
-        console.log(patientId)
+      console.log("Fetching appointments for patient:", patientId);
+      
       try {
-        const response = await axios.get(
+       const response = await axios.get(
           `${import.meta.env.VITE_APP_URL}/appointment/user/confirmed/${patientId}`,
           {
               headers: {
@@ -20,10 +21,17 @@ const UserHome = () => {
               },
           }
       );
-      const appointments = response.data?.appointments || [];
-        const approvedAppointments = response.data.appointments.filter(
+    
+       
+        console.log("API Response:", response.data);
+    
+       
+        const appointments = response.data?.appointments || [];
+        
+        const approvedAppointments = appointments.filter(
           (appointment) => appointment.status === "confirmed"
         );
+    
         setAppointments(approvedAppointments);
       } catch (error) {
         console.error("Error fetching appointments:", error);
