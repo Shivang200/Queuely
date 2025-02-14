@@ -35,7 +35,7 @@ const UserHome = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/signin");
   };
 
   return (
