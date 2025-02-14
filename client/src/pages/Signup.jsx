@@ -17,6 +17,10 @@ const SignUp = () => {
   };
 
   const handleSubmit = async(e) => {
+    if (formData.email !== formData.email.toLowerCase()) {
+      alert("Email must be in lowercase!");
+      return;
+    }
     e.preventDefault();
     try {
       const response = await axios.post(
