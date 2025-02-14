@@ -27,8 +27,9 @@ const SignupDoctor = () => {
         formData
     );
     
-    localStorage.setItem("patientId", response.data.userId);
-      localStorage.setItem("patientName", response.data.name);
+    localStorage.setItem("doctorId", response.data.userId);
+    localStorage.setItem("doctorName", response.data.name);
+    
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.role);
       alert(response.data.message);
