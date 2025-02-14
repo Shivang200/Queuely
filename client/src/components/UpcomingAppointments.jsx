@@ -10,12 +10,14 @@ const UpcomingAppointments = () => {
       try {
         console.log("Fetching upcoming appointments for doctor:", doctorId);
         const response = await axios.get(
-          `http://localhost:5000/appointment/confirmed/${doctorId}`,{
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+          `${import.meta.env.VITE_APP_URL}/appointment/confirmed/${doctorId}`,
+          {
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
           }
-        );
+      );
+      
 
         console.log("API Response:", response.data);
 
@@ -42,11 +44,15 @@ const UpcomingAppointments = () => {
       const timestamp = new Date().toISOString(); // Generate timestamp
 
       const response = await axios.put(
-        `http://localhost:5000/appointment/${appointmentId}`,
-        { status: newStatus, time: timestamp }, {headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },} // Include timestamp in request
-      );
+        `${import.meta.env.VITE_APP_URL}/appointment/${appointmentId}`,
+        { status: newStatus, time: timestamp }, // Include timestamp in request
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }
+    );
+    
 
       console.log("Status updated:", response.data);
       // .map() loops through all appointments.

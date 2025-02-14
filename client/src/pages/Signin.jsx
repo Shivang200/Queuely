@@ -29,9 +29,10 @@ const Signin = () => {
     try {
       // Sends login data to the backend
       const response = await axios.post(
-        "http://localhost:5000/user/signin",
+        `${import.meta.env.VITE_APP_URL}/user/signin`,
         formData
-      );
+    );
+    
       console.log(response); // Logs response for debugging
 
       if (response.data && response.data.token) {

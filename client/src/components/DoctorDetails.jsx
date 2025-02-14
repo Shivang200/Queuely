@@ -13,11 +13,15 @@ const DoctorDetails = () => {
   useEffect(() => {
     const fetchDoctor = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/appointment/doctor/${id}`,{
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_URL}/appointment/doctor/${id}`,
+          {
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+          }
+      );
+      
         setDoctor(response.data.doctor);
       } catch (error) {
         setError("Failed to fetch doctor details. Please try again.");
@@ -36,14 +40,15 @@ const DoctorDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/appointment/book",
+        `${import.meta.env.VITE_APP_URL}/appointment/book`,
         { patientId, doctorId, date }, // Request body (data)
         {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
         }
-      );
+    );
+    
 
       alert(response.data.msg);
       navigate("/userhome")

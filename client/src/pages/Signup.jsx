@@ -19,7 +19,11 @@ const SignUp = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/user/signup/patient", formData);
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_URL}/user/signup/patient`,
+        formData
+    );
+    
       localStorage.setItem("patientId", response.data.userId);
       localStorage.setItem("patientName", response.data.name);
       localStorage.setItem("token", response.data.token);

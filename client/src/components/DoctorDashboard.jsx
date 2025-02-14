@@ -23,12 +23,14 @@ const DoctorDashboard = () => {
       try {
         // Sending GET request to fetch appointment statistics for the doctor
         const response = await axios.get(
-          `http://localhost:5000/appointment/stats/${doctorId}`,{
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+          `${import.meta.env.VITE_APP_URL}/appointment/stats/${doctorId}`,
+          {
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
           }
-        );
+      );
+      
         setStats(response.data); // Updating the stats state with fetched data
       } catch (error) {
         // Logging any error that occurs during the fetch process

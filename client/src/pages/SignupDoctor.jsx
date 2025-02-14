@@ -22,7 +22,11 @@ const SignupDoctor = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-    const response = await axios.post("http://localhost:5000/user/signup/doctor", formData);
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_URL}/user/signup/doctor`,
+        formData
+    );
+    
     localStorage.setItem("patientId", response.data.userId);
       localStorage.setItem("patientName", response.data.name);
       localStorage.setItem("token", response.data.token);

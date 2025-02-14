@@ -12,11 +12,15 @@ const UserHome = () => {
     const fetchApprovedAppointments = async () => {
         console.log(patientId)
       try {
-        const response = await axios.get(`http://localhost:5000/appointment/user/confirmed/${patientId}`,{
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_URL}/appointment/user/confirmed/${patientId}`,
+          {
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+          }
+      );
+      
         const approvedAppointments = response.data.appointments.filter(
           (appointment) => appointment.status === "confirmed"
         );
