@@ -59,7 +59,7 @@ const DoctorDetails = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/signin");
   };
 
   if (loading) return <p className="text-center text-gray-600">Loading doctor details...</p>;
