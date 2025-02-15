@@ -5,13 +5,9 @@ const PrivateDoctorRoute = ({ children }) => {
   const role = localStorage.getItem("role");
   
          
-  if(role=='patient'){
+  if (!role) return <Navigate to="/signin" />; // Redirect if no role is found
+  if (role === "patient") return <Navigate to="/" />; // Redirect doctors to home
 
-    return(
-       <Navigate to={'/'} />
-    )
-
-  }
      
   return children;
 };
