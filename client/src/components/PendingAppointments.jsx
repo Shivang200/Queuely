@@ -108,6 +108,10 @@ const PendingAppointments = () => {
                 <strong>Phone:</strong> {appointment.patient.phone}
               </p>
               <p className="text-gray-600">
+                <strong>Description:</strong>{" "}
+                {appointment.description || "No description provided"}
+              </p>
+              <p className="text-gray-600">
                 <strong>Appointment Date:</strong>{" "}
                 {new Date(appointment.Date).toLocaleString()}
               </p>

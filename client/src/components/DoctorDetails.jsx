@@ -119,6 +119,13 @@ const DoctorDetails = () => {
             value={appointmentDate}
             onChange={(e) => setAppointmentDate(e.target.value)}
           />
+          <input
+            type="text"
+            placeholder="Describe your symptoms (optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="mt-4 px-4 py-2 border rounded-lg w-full focus:ring-2 focus:ring-teal-600"
+          />
 
           {/* Book Appointment Button */}
           <button
