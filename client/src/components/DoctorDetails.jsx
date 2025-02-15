@@ -42,7 +42,7 @@ const DoctorDetails = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_URL}/appointment/book`,
-        { patientId, doctorId, date }, // Request body (data)
+        { patientId, doctorId, date,description }, // Request body (data)
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
