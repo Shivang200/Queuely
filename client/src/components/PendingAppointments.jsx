@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "./API";
 
 const PendingAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -9,8 +10,8 @@ const PendingAppointments = () => {
     const fetchPendingAppointments = async () => {
       try {
         console.log("Fetching pending appointments for doctor:", doctorId);
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_URL}/appointment/pending/${doctorId}`,
+        const response = await API.get(
+          `/appointment/pending/${doctorId}`,
           {
               headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -51,8 +52,8 @@ const PendingAppointments = () => {
         time: selectedTime || new Date().toISOString(), // Default to current timestamp
       };
 
-      const response = await axios.put(
-        `${import.meta.env.VITE_APP_URL}/appointment/${appointmentId}`,
+      const response = await API.put(
+        `/appointment/${appointmentId}`,
         updateData,
         {
             headers: {

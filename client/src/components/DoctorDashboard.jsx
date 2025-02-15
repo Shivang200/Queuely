@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import API from "./API";
 
 const DoctorDashboard = () => {
   const doctorName = localStorage.getItem("doctorName") || "Doctor";
@@ -22,8 +23,8 @@ const DoctorDashboard = () => {
     const fetchStats = async () => {
       try {
         // Sending GET request to fetch appointment statistics for the doctor
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_URL}/appointment/stats/${doctorId}`,
+        const response = await API.get(
+          `/appointment/stats/${doctorId}`,
           {
               headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,

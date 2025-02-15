@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API from "./API";
 
 const DoctorDetails = () => {
   const { id } = useParams();
@@ -14,8 +15,8 @@ const DoctorDetails = () => {
   useEffect(() => {
     const fetchDoctor = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_URL}/appointment/doctor/${id}`,
+        const response = await API.get(
+          `/appointment/doctor/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,8 +41,8 @@ const DoctorDetails = () => {
     const date = appointmentDate;
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_URL}/appointment/book`,
+      const response = await API.post(
+        `/appointment/book`,
         { patientId, doctorId, date,description }, // Request body (data)
         {
           headers: {

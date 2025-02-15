@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "./API";
 
 const UserDashboard = () => {
   const [doctors, setDoctors] = useState([]);
@@ -11,8 +12,8 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_URL}/appointment/all/doctors`,
+        const response = await API.get(
+          `/appointment/all/doctors`,
           {
               headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,

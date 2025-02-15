@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "./API";
 
 const CompletedAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -9,8 +10,8 @@ const CompletedAppointments = () => {
     const fetchCompletedAppointments = async () => {
       try {
         console.log("Fetching completed appointments for doctor:", doctorId);
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_URL}/appointment/completed/${doctorId}`,
+        const response = await API.get(
+          `/appointment/completed/${doctorId}`,
           {
               headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -47,8 +48,8 @@ const CompletedAppointments = () => {
 
     try {
       // Send a DELETE request to the server to remove the appointment
-      await axios.delete(
-        `${import.meta.env.VITE_APP_URL}/appointment/delete/${id}`,
+      await API.delete(
+        `/appointment/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

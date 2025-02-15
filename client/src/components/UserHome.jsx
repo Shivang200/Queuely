@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API from "./API";
 
 const UserHome = () => {
   const navigate = useNavigate();
@@ -13,8 +14,10 @@ const UserHome = () => {
       console.log("Fetching appointments for patient:", patientId);
       
       try {
-       const response = await axios.get(
-          `${import.meta.env.VITE_APP_URL}/appointment/user/confirmed/${patientId}`,
+
+      //  const response = await axios.get(----> await API.get where api is defined axios instance and no need to share url everythime it is shared in API.JSX
+       const response = await API.get(
+          `/appointment/user/confirmed/${patientId}`,
           {
               headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
