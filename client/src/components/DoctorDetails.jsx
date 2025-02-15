@@ -16,12 +16,12 @@ const DoctorDetails = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_APP_URL}/appointment/doctor/${id}`,
           {
-              headers: {
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
           }
-      );
-      
+        );
+
         setDoctor(response.data.doctor);
       } catch (error) {
         setError("Failed to fetch doctor details. Please try again.");
@@ -43,17 +43,19 @@ const DoctorDetails = () => {
         `${import.meta.env.VITE_APP_URL}/appointment/book`,
         { patientId, doctorId, date }, // Request body (data)
         {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-    );
-    
+      );
 
       alert(response.data.msg);
-      navigate("/userhome")
+      navigate("/userhome");
     } catch (error) {
-      alert("Failed to book appointment enter dates as mentioned :" + (error.response?.data?.msg || error.message));
+      alert(
+        "Failed to book appointment enter dates as mentioned :" +
+          (error.response?.data?.msg || error.message)
+      );
     }
   };
 
@@ -62,17 +64,26 @@ const DoctorDetails = () => {
     navigate("/signin");
   };
 
-  if (loading) return <p className="text-center text-gray-600">Loading doctor details...</p>;
+  if (loading)
+    return (
+      <p className="text-center text-gray-600">Loading doctor details...</p>
+    );
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
       <nav className="bg-teal-700 p-4 flex justify-between items-center shadow-md">
-        <h1 className="text-white text-2xl font-bold cursor-pointer" onClick={() => navigate("/")}>
+        <h1
+          className="text-white text-2xl font-bold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           Queuely
         </h1>
-        <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+        >
           Logout
         </button>
       </nav>
@@ -80,19 +91,27 @@ const DoctorDetails = () => {
       {/* Doctor Details Card */}
       <div className="flex justify-center items-center py-10 px-4">
         <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-teal-500 w-full max-w-2xl">
-          <h2 className="text-2xl font-semibold text-gray-900">{doctor.name}</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">
+            {doctor.name}
+          </h2>
           <p className="text-gray-600 mt-2">
-            <strong className="text-teal-600">Speciality:</strong> {doctor.specialization}
+            <strong className="text-teal-600">Speciality:</strong>{" "}
+            {doctor.specialization}
           </p>
           <p className="text-gray-600">
-            <strong className="text-teal-600">Address:</strong> {doctor.clinicAddress}
+            <strong className="text-teal-600">Clinic name:</strong>{" "}
+            {doctor.clinicName || "Not Available"}
           </p>
           <p className="text-gray-600">
-            <strong className="text-teal-600">Available Time:</strong> {doctor.availableTimings || "Not Available"}
+            <strong className="text-teal-600">Address:</strong>{" "}
+            {doctor.clinicAddress}
+          </p>
+          <p className="text-gray-600">
+            <strong className="text-teal-600">Available Time:</strong>{" "}
+            {doctor.availableTimings || "Not Available"}
           </p>
 
           {/* Date Input - Manual entry on small screens, Calendar picker on large screens */}
-          
 
           <input
             type="date"

@@ -11,6 +11,7 @@ const SignupDoctor = () => {
     email: "",
     password: "",
     specialization: "",
+    clinicName: "",  
     clinicAddress: "",
     availableTimings: "",
   });
@@ -94,6 +95,15 @@ const SignupDoctor = () => {
               name="specialization"
               placeholder="Specialization"
               value={formData.specialization}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
+              required
+            />
+             <input
+              type="text"
+              name="clinicName"
+              placeholder="Clinic Name"
+              value={formData.clinicName}
               onChange={handleChange}
               className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
               required

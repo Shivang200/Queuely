@@ -30,7 +30,8 @@ const doctorValidate = zod.object({
   password: zod.string(), // Password length validation
   specialization: zod.string(), // Ensure specialization is provided
   clinicAddress: zod.string(), // Optional field for clinic details
-  availableTimings: zod.string() // Optional field for available timings
+  availableTimings: zod.string(), // Optional field for available timings
+  clinicName : zod.string() // Optional field for available timings
 });
 
 // POST route to handle admin login
@@ -149,6 +150,7 @@ router.post("/signup/doctor", async (req, res) => {
       email,
       password,
       specialization,
+      clinicName, 
       clinicAddress,
       availableTimings,
     } = response.data;
@@ -163,6 +165,7 @@ router.post("/signup/doctor", async (req, res) => {
       email,
       password: hashedPassword,
       specialization,
+      clinicName,
       clinicAddress,
       availableTimings,
       role: "doctor",
@@ -170,6 +173,7 @@ router.post("/signup/doctor", async (req, res) => {
 
     // Save to database
     await newDoctor.save();
+    console.log(newDoctor)
 
     // Generate JWT Token
     const token = jwt.sign(

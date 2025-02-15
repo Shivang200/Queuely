@@ -84,6 +84,12 @@ const UserHome = () => {
                 <p className="text-gray-600">
                   <strong>Date:</strong> {new Date(appointment.time).toLocaleString()}
                 </p>
+                <p className="text-gray-600">
+                  <strong className="text-gray-600">Clinic name:</strong> {appointment.doctor.clinicName || "Not Available"}
+                </p>
+                <p className="text-gray-600">
+                  <strong className="text-gray-600">Clinic address:</strong> {appointment.doctor.clinicAddress || "Not Available"}
+                </p>
                 <p className="text-green-600 font-semibold">Status: {appointment.status}</p>
               </div>
             ))}

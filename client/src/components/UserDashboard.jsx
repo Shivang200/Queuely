@@ -62,6 +62,9 @@ const UserDashboard = () => {
                   <strong className="text-teal-600">Speciality:</strong> {doctor.specialization}
                 </p>
                 <p className="text-gray-600">
+                  <strong className="text-teal-600">Clinic name:</strong> {doctor.clinicName || "Not Available"}
+                </p>
+                <p className="text-gray-600">
                   <strong className="text-teal-600">Address:</strong> {doctor.clinicAddress}
                 </p>
                 <p className="text-gray-600">
