@@ -10,7 +10,7 @@ const router = express.Router();
 // authMiddleware- Patient books an appointment (only logged-in patients can book)
 router.post("/book", authMiddleware,authRole(["patient"]), async (req, res) => {
   try {
-    const { patientId, doctorId, date } = req.body;
+    const { patientId, doctorId, date ,description} = req.body;
     // Log IDs to see their format
     console.log("Patient ID:", patientId);
     console.log("Doctor ID:", doctorId);
@@ -39,7 +39,7 @@ router.post("/book", authMiddleware,authRole(["patient"]), async (req, res) => {
       patient: patientObjectId,
       doctor: doctorObjectId,
       Date: new Date(date),
-
+      description: description || "",
       status: "pending", // Default status is "pending"
     });
 
@@ -100,7 +100,7 @@ router.get("/pending/:doctorId",authMiddleware,authRole(["doctor"]), async (req,
       doctor: doctorId,
       status: "pending",
     })
-      .populate("patient", "name email phone") // Get patient details
+      .populate("patient", "name email phone").select("Date status description") // Get patient details
       .sort({ date: 1, time: 1 }); // Sort by date & time
 
     res
