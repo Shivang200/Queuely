@@ -9,6 +9,7 @@ const DoctorDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
+  const [description, setDescription] = useState(""); 
 
   useEffect(() => {
     const fetchDoctor = async () => {
