@@ -67,6 +67,15 @@ router.post("/signup/patient", async (req, res) => {
 
     // Validate input using Zod's safeParse
     const response = patientValidate.safeParse(patientDetails);
+     // Check specifically for phone number validation
+     const phoneError = errors.find((err) => err.path.includes("phone"));
+
+     // If phone is invalid, return custom error message
+     if (phoneError || !/^\d{10}$/.test(req.body.phone)) {
+       return res
+         .status(400)
+         .json({ msg: "Phone number must be exactly 10 digits" });
+     }
 
     if (!response.success) {
       return res.status(400).json({ error: "Invalid input" });
