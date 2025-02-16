@@ -69,9 +69,9 @@ router.post("/signup/patient", async (req, res) => {
     const response = patientValidate.safeParse(patientDetails);
 
     if (!response.success) {
-      console.log(response.error.errors);
-      return res.status(400).json({ msg: response.error.errors[0].message });
+      return res.status(400).json({ msg: "Invalid input" });
     }
+
 
     const { name, phone, email, password } = response.data;
 

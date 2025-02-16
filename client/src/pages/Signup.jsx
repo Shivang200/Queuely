@@ -17,11 +17,16 @@ const SignUp = () => {
   };
 
   const handleSubmit = async(e) => {
+    e.preventDefault();
     if (formData.email !== formData.email.toLowerCase()) {
       alert("Email must be in lowercase!");
       return;
     }
-    e.preventDefault();
+    if (!/^[0-9]{10}$/.test(formData.phone)) {
+      alert("Phone number must be exactly 10 digits!");
+      return;
+    }
+    
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_URL}/user/signup/patient`,
