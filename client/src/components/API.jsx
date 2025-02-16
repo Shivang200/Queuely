@@ -9,6 +9,7 @@ const API = axios.create({
 API.interceptors.response.use(
   (response) => response, // If response is OK, return it
   (error) => {
+    // the 403 comming from authmiddleware if the token is invalid or not signed 
     if (error.response && error.response.status === 403) {
       localStorage.removeItem("token"); // Clear invalid token
       window.location.href = "/signin"; // Redirect to login

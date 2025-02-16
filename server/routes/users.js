@@ -15,7 +15,7 @@ const router = express.Router();
 
 const patientValidate = zod.object({
   name: zod.string(),
-  phone: zod.string(),
+  phone: zod.string().regex(/^[0-9]{10}$/, "Phone number must be 10 digits"),
   email: zod.string().email(),
   password: zod.string(),
 });
@@ -25,7 +25,7 @@ const SigninDetails = zod.object({
 });
 const doctorValidate = zod.object({
   name: zod.string(), // Ensure name is provided
-  phone: zod.string(), // Validate phone number format
+  phone: zod.string().regex(/^[0-9]{10}$/, "Phone number must be 10 digits"), // Validate phone number format
   email: zod.string().email(), // Ensure valid email format
   password: zod.string(), // Password length validation
   specialization: zod.string(), // Ensure specialization is provided
